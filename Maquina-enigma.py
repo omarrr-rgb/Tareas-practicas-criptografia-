@@ -7,12 +7,19 @@ rotor2 = "AJDKSIRUXBLHWTMCQGZNPYFVOE"
 rotor3 = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
 reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 
+# posiciones iniciales de rotores
+pos1 = 0
+pos2 = 0
+pos3 = 0
+
 
 def enigma(mensaje, clave):
 
-    o1 = alfabeto.index(clave[0])
-    o2 = alfabeto.index(clave[1])
-    o3 = alfabeto.index(clave[2])
+    global pos1, pos2, pos3
+
+    o1 = (alfabeto.index(clave[0]) + pos1) % 26
+    o2 = (alfabeto.index(clave[1]) + pos2) % 26
+    o3 = (alfabeto.index(clave[2]) + pos3) % 26
 
     resultado = ""
 
@@ -58,7 +65,8 @@ while True:
     print("\n=== MAQUINA ENIGMA ===")
     print("1. Cifrar")
     print("2. Descifrar")
-    print("3. Salir")
+    print("3. Configurar rotores")
+    print("4. Salir")
 
     opcion = input("Seleccione una opción: ")
 
@@ -77,4 +85,11 @@ while True:
         print("Resultado:", enigma(mensaje, clave))
 
     elif opcion == "3":
+
+        print("\nConfigurar posiciones iniciales de rotores (0-25)")
+        pos1 = int(input("Posición rotor 1: "))
+        pos2 = int(input("Posición rotor 2: "))
+        pos3 = int(input("Posición rotor 3: "))
+
+    elif opcion == "4":
         break
